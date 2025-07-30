@@ -1,11 +1,9 @@
 # 🌬️ Airflow UI – A Universal UI Component Toolkit
----
 
 ## 📌 Overview
 
 **Airflow UI** is a powerful, open-source, developer-oriented UI component library that offers a massive collection of beautifully designed, animated, and 3D-enriched UI components. Built using **Tailwind CSS**, **Three.js**, and modern JavaScript frameworks (React, Vue, Svelte, HTML), it allows developers to rapidly build high-quality user interfaces with minimal effort.
 
----
 
 ## 🎯 Key Features
 
@@ -19,7 +17,6 @@
 - 🎥 **Animated & 3D Support:** With **GSAP**, **Motion One**, and **Three.js**.
 - 📊 **Usage Analytics:** Discover popular/trending components.
 
----
 
 ## ❓ Why Airflow UI?
 
@@ -31,7 +28,6 @@ Modern UI development demands both **functionality** and **aesthetic appeal**. E
 
 Airflow UI solves all of these pain points with a **free**, **framework-agnostic**, **design-forward**, and **developer-centric** toolkit.
 
----
 
 ## 🚀 Use Cases
 
@@ -40,7 +36,6 @@ Airflow UI solves all of these pain points with a **free**, **framework-agnostic
 - Students prototyping projects quickly
 - Agencies developing modern dashboards and apps
 
----
 
 ## 🔧 Tools & Technologies
 
@@ -55,7 +50,6 @@ Airflow UI solves all of these pain points with a **free**, **framework-agnostic
 | Next.js / Astro | Web platform & documentation        |
 | TurboRepo       | Monorepo management                 |
 
----
 
 ## ✅ Outcomes
 
@@ -64,13 +58,11 @@ Airflow UI solves all of these pain points with a **free**, **framework-agnostic
 - Increase code quality and consistency
 - Grow a collaborative community of developers/designers
 
----
 
 ## 📄 License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
----
 
 ## 🤝 Contributing
 
