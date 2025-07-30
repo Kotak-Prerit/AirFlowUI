@@ -1,10 +1,4 @@
 # 🌬️ Airflow UI – A Universal UI Component Toolkit
-
-**Developed by:**
-- Prerit Kotak (2405112110056)
-- Harsh Chandanya (2405112110026)
-- Vishwas Bariya (2405112110015)
-
 ---
 
 ## 📌 Overview
