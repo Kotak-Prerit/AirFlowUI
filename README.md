@@ -57,20 +57,6 @@ Airflow UI solves all of these pain points with a **free**, **framework-agnostic
 
 ---
 
-## 📅 Project Timeline
-
-| Phase                          | Timeline         |
-|--------------------------------|------------------|
-| Project Definition Submission  | June 30          |
-| Approval & Presentation        | July 01–17       |
-| Project Profile Submission     | July 18          |
-| Requirement Analysis & Design  | July 18 – Aug 02 |
-| Implementation & Demo          | Aug 02 – Aug 13  |
-| Testing & Final Review         | Aug 14 – Aug 27  |
-| Final Submission               | Aug 31           |
-
----
-
 ## ✅ Outcomes
 
 - Build beautiful UIs in record time
@@ -80,29 +66,6 @@ Airflow UI solves all of these pain points with a **free**, **framework-agnostic
 
 ---
 
-## 📦 Installation & Usage
-
-_TODO: Include CLI installation guide and code examples once implementation is complete._
-
----
-
-## 📝 License
-
-Airflow UI is released under a free and open-source license. See `LICENSE` for more details. Contributions are welcome!
-
----
-
 ## 🤝 Contributing
 
 We welcome contributions! Help us build the largest, free, and modern UI component toolkit for the web. Fork the repo, submit PRs, or suggest features.
-
----
-
-## 📬 Contact
-
-For queries, feedback, or collaboration:
-
-- 📧 vishwasbariya@example.com
-- 🔗 [Project Repo/Website - coming soon]
-
----
