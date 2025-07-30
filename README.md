@@ -66,6 +66,12 @@ Airflow UI solves all of these pain points with a **free**, **framework-agnostic
 
 ---
 
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
 ## 🤝 Contributing
 
 We welcome contributions! Help us build the largest, free, and modern UI component toolkit for the web. Fork the repo, submit PRs, or suggest features.
