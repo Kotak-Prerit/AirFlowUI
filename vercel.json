@@ -1,7 +1,7 @@
 {
   "build": {
     "env": {
-      "VITE_API_URL": "https://airflow.onrender.com/api"
+      "VITE_API_URL": "https://airflow-ob6u.onrender.com/api"
     }
   },
   "rewrites": [

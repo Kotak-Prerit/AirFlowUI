@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 
 export default function SignUpPage() {
-  const API_BASE = import.meta.env.VITE_API_URL || 'https://airflow.onrender.com/api'
+  const API_BASE = import.meta.env.VITE_API_URL || 'https://airflow-ob6u.onrender.com/api'
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
