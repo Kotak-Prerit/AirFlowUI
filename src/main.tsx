@@ -6,20 +6,20 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Lenis from 'lenis'
 
 // React Router v7 lazy route helpers
-const lazyHome = async () => ({ Component: (await import('./pages/Home')).default })
-const lazyComponents = async () => ({ Component: (await import('./pages/Components')).default })
-const lazyTemplates = async () => ({ Component: (await import('./pages/Templates')).default })
-const lazySignIn = async () => ({ Component: (await import('./pages/SignIn')).default })
-const lazySignUp = async () => ({ Component: (await import('./pages/SignUp')).default })
-const lazyDashboard = async () => ({ Component: (await import('./pages/Dashboard')).default })
-const lazyTerms = async () => ({ Component: (await import('./pages/Terms')).default })
+const lazyHome = async () => ({ Component: (await import('./Pages/Home')).default })
+const lazyComponents = async () => ({ Component: (await import('./Pages/Components')).default })
+const lazyTemplates = async () => ({ Component: (await import('./Pages/Templates')).default })
+const lazySignIn = async () => ({ Component: (await import('./Pages/SignIn')).default })
+const lazySignUp = async () => ({ Component: (await import('./Pages/SignUp')).default })
+const lazyDashboard = async () => ({ Component: (await import('./Pages/Dashboard')).default })
+const lazyTerms = async () => ({ Component: (await import('./Pages/Terms')).default })
 
 function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.1,
       smoothWheel: true,
-      smoothTouch: false,
+      // smoothTouch: false, // Removed this property as it doesn't exist in LenisOptions
     })
 
     function raf(time: number) {
@@ -28,7 +28,6 @@ function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
     }
     requestAnimationFrame(raf)
     return () => {
-      // @ts-expect-error lenis has destroy
       lenis.destroy?.()
     }
   }, [])
