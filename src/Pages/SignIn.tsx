@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 
 export default function SignInPage() {
-  const API_BASE = (import.meta as any).env?.VITE_API_URL || '/api'
+  const API_BASE = import.meta.env.VITE_API_URL || 'https://airflow.onrender.com/api'
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [accept, setAccept] = useState(false)

@@ -1,0 +1,13 @@
+{
+  "build": {
+    "env": {
+      "VITE_API_URL": "https://airflow.onrender.com/api"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
