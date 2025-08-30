@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { AuthProvider } from './contexts/AuthContext'
 import Lenis from 'lenis'
 
 // React Router v7 lazy route helpers
@@ -52,8 +53,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <SmoothScrollProvider>
-      <RouterProvider router={router} />
-    </SmoothScrollProvider>
+    <AuthProvider>
+      <SmoothScrollProvider>
+        <RouterProvider router={router} />
+      </SmoothScrollProvider>
+    </AuthProvider>
   </StrictMode>,
 )

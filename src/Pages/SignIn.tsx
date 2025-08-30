@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function SignInPage() {
   const API_BASE = import.meta.env.VITE_API_URL || 'https://airflow-ob6u.onrender.com/api'
@@ -9,6 +10,7 @@ export default function SignInPage() {
   const [accept, setAccept] = useState(false)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { login } = useAuth()
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -24,7 +26,11 @@ export default function SignInPage() {
       const ct = res.headers.get('content-type') || ''
       const data = ct.includes('application/json') ? await res.json() : await res.text()
       if (!res.ok) throw new Error((ct.includes('application/json') ? (data as any)?.message : String(data)) || 'Failed to sign in')
-      toast.success('Signed in')
+      
+      // Store authentication data
+      login(data.token, data.user)
+      
+      toast.success('Signed in successfully')
       navigate('/dashboard')
     } catch (err: any) {
       toast.error(err.message)

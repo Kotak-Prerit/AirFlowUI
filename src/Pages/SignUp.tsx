@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function SignUpPage() {
   const API_BASE = import.meta.env.VITE_API_URL || 'https://airflow-ob6u.onrender.com/api'
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [otp, setOtp] = useState('')
@@ -58,9 +60,12 @@ export default function SignUpPage() {
         }
         throw new Error(msg)
       }
-      setMessage('Account created. You can sign in now.')
-      toast.success('Account created')
-      navigate('/signin')
+      
+      // Store authentication data and redirect to dashboard
+      login(data.token, data.user)
+      
+      toast.success('Account created successfully')
+      navigate('/dashboard')
     } catch (err: any) {
       setMessage(err.message)
       toast.error(err.message)
