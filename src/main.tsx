@@ -1,10 +1,10 @@
-import { StrictMode, useEffect } from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
-import Lenis from 'lenis'
+// import Lenis from 'lenis'
 
 // React Router v7 lazy route helpers
 const lazyHome = async () => ({ Component: (await import('./Pages/Home')).default })
@@ -16,22 +16,6 @@ const lazyDashboard = async () => ({ Component: (await import('./Pages/Dashboard
 const lazyTerms = async () => ({ Component: (await import('./Pages/Terms')).default })
 
 function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.1,
-      smoothWheel: true,
-      // smoothTouch: false, // Removed this property as it doesn't exist in LenisOptions
-    })
-
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
-    return () => {
-      lenis.destroy?.()
-    }
-  }, [])
   return children as any
 }
 

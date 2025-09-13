@@ -1,0 +1,172 @@
+//Pug Code :
+- let cats = { tiger: '🐯', lion: '🦁', jaguar: '🐆', leopard: '🐆' };
+- let o = Object.entries(cats);
+
+div.component(style=`--n: ${o.length}`)
+	button.toggler.visual-item(aria-expanded='false' aria-controls='cats-menu')
+		// in a real project, this would be an SVG
+		span.ico(aria-hidden='true') 😼
+		span cats
+	// found out about inert attribute from
+	// https://codepen.io/aardrian/pen/jOvRWbP?editors=1000
+	// then looked it up
+	// https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inert
+	ul#cats-menu(inert)
+		- o.forEach((c, i) => {
+			- let [k, v] = c;
+			li.visual-item(style=`--i: ${i}`)
+				// in a real project, this would be an SVG
+				span.ico(aria-hidden='true') #{v}
+				span #{k}
+				// this would open a submenu if we had one
+				// but we don't, so it's disabled 
+				// and hdden from screenreaders
+				// if you do add a submenu, 
+				// remove first two attributes
+				// and give submenu an id identical
+				// to this button's area-controls
+				button.toggler(disabled aria-hidden='true' 
+											 aria-label=`open ${k} submenu` 
+											 aria-expanded='false'
+											 aria-controls=`${k}-submenu`) ➜
+		- })
+
+
+// SCSS Code :
+$s: .5em;
+$hue: 180;
+$sat: 90%;
+$lum: 50%;
+
+* {
+	--hl: 0;
+	--sel: 0;
+	margin: 0;
+	border: none;
+	padding: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	text-align: left
+}
+
+html, body, div, ul, .visual-item, .ico { display: grid }
+
+html { height: 100% }
+
+body {
+	perspective: 25em;
+	perspective-origin: 50% calc(50% - 12.5em);
+	background: #000
+}
+
+/* when there's better :has() support, 
+ * replace selector with :has(> .visual-item) */
+.component, [id*='menu'] { grid-gap: $s }
+
+div, ul { transform-style: preserve-3d }
+
+.component {
+	place-self: center;
+	padding: $s;
+	font: clamp(.625em, 5vw, 1.125em) monospace
+}
+
+[aria-expanded], [id*='menu'] { --hid: 0 }
+[aria-expanded='false'], [id*='menu'][inert] { --hid: 1 }
+
+button {
+	--highlight: 
+		0 0 calc(var(--hl)*7px) hsl(#{$hue}, #{$sat}, #{$lum});
+	box-shadow: var(--highlight);
+	
+	&[disabled] { opacity: .375 }
+	&:focus { outline: none }
+	&:not([disabled]) {
+		cursor: pointer;
+		
+		&:is(:focus, :hover) { --hl: 1 }
+	}
+}
+
+:not(li) > .toggler::after {
+	width: .625em;
+	aspect-ratio: 1;
+	border: solid 0 currentcolor;
+	border-width: 0 2px 2px 0;
+	transform: rotate(calc(45deg - var(--hid)*90deg));
+	transition: inherit;
+	content: ''
+}
+
+.toggler[aria-expanded='true'] { --sel: 1 }
+
+.visual-item {
+	--m: calc(.5*var(--n));
+	--dif: calc(var(--m) - var(--i) - 1);
+	grid-gap: 3*$s;
+	grid-template-columns: 
+		max-content Min(12.5em, 20vw) max-content;
+	align-items: center;
+	overflow: hidden;
+	padding: 2*$s;
+	border-radius: .5rem;
+	transform: 
+		translate3d(
+			0, 
+			calc(var(--hid)*var(--dif)*(100% + #{$s})), 
+			calc(var(--hid)*(var(--i) + 1)*-2.5em));
+	--cast-back: 
+		0 -1px 1px -1px hsla(0, 0%, 0%, .145), 
+		0 -2px 2px -2px hsla(0, 0%, 0%, .137), 
+		0 -6px 6px -3px hsla(0, 0%, 0%, .118), 
+		0 -20px 20px -4px hsla(0, 0%, 0%, .05);
+	box-shadow: var(--cast-back);
+	background: #222;
+	color: hsl(#{$hue}, #{$sat}, calc(100% - var(--sel)*#{$lum}));
+	text-transform: uppercase;
+	filter: brightness(calc(1 - (var(--i) + 1)*var(--hid)*.1));
+	
+	.ico {
+		place-content: center;
+		width: 2em;
+		aspect-ratio: 1;
+		border-radius: inherit;
+		background: #141414;
+		font-size: 1.5em;
+		filter: saturate(0)
+	}
+	
+	> .toggler { font-size: 2em }
+	
+	@media (prefers-reduced-motion: no-preference) {
+		transition: .375s cubic-bezier(.35, 1.35, .65, 1)
+	}
+}
+
+button.visual-item {
+	--i: -1;
+	z-index: 1; /* Safari bugginess fix */
+	box-shadow: var(--highlight), var(--cast-back)
+}
+
+// Javascript Code :
+function toggler(_el) {
+	if(_el == document.body) return null
+	if(_el.classList.contains('toggler')) return _el;
+	return toggler(_el.parentNode)
+}
+
+addEventListener('click', e => {
+	let _t = toggler(e.target);
+	
+	if(_t && !_t.hasAttribute('disabled')) {
+		// get target menu element and bit (0 or 1) value of whether expanded
+		let _m = document.getElementById(_t.getAttribute('aria-controls')), 
+				b = 1*(_t.getAttribute('aria-expanded') === 'true');
+		
+		// toggle aria-expanded attribute on button & inert attribute on menu
+		_t.setAttribute('aria-expanded', !b);
+		_m[`${['remove', 'set'][b]}Attribute`](...['inert', true].slice(0, b + 1))
+	}
+})

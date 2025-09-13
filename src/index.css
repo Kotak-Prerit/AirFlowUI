@@ -14,3 +14,7 @@ html, body, #root { height: 100%; }
 body { @apply bg-black text-white; font-family: 'Funnel Display', sans-serif; }
 .container-af { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
 .bg-card { @apply bg-zinc-900/60 border border-zinc-800 rounded-2xl; }
+
+*::-webkit-scrollbar{
+  display: none;
+}

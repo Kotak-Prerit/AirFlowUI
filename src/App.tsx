@@ -1,7 +1,7 @@
 import { Outlet, NavLink } from 'react-router-dom'
 import SearchModal from './components/SearchModal'
 import MobileMenu from './components/MobileMenu'
-import Avatar from './components/Avatar'
+import AvatarDropdown from './components/AvatarDropdown'
 import { Toaster } from 'sonner'
 import { useAuth } from './contexts/AuthContext'
 
@@ -22,7 +22,7 @@ function App() {
             {isAuthenticated ? (
               <>
                 <NavLink to="/dashboard" className={({isActive})=>`hover:text-blue-400 ${isActive? 'text-blue-400':'text-zinc-300'}`}>dashboard</NavLink>
-                <Avatar size="sm" />
+                <AvatarDropdown />
               </>
             ) : (
               <>
