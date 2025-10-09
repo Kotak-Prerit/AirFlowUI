@@ -40,7 +40,7 @@ const ButtonCards = () => {
 
       <div className="flex flex-wrap gap-6">
         {currentButtons.map((button) => (
-          <div key={button.id} className={`${button.background} border border-zinc-800 rounded-xl p-6 min-w-[300px] min-h-[200px] flex-1`}>
+          <div key={button.id} className={`${button.background} border border-zinc-800 rounded-xl p-6 min-w-[250px] min-h-[200px] flex-1`}>
             
             {/* Button preview area */}
             <div className="h-full rounded-lg p-8">
