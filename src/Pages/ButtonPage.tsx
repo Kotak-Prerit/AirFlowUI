@@ -34,7 +34,7 @@ const ButtonCards = () => {
       <div>
         <h1 className="text-4xl font-semibold mb-4">Buttons</h1>
         <p className="text-xl text-zinc-400">
-          AirflowUI buttons uses tailwind classes under the hood for easy customization. Please make sure tailwind is integrated with your project.
+          AirflowUI buttons uses tailwind classes under the hood for easy customization. <br /> Please make sure tailwind is integrated with your project.
         </p>
       </div>
 

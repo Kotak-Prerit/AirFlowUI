@@ -4,10 +4,10 @@
       "title": "Getting Started",
       "isAccordion": true,
       "items": [
-        { "id": "introduction", "title": "Introduction", "active": true, "href": "/components" },
-        { "id": "design-principles", "title": "Design Principles", "href": "/components" },
-        { "id": "usage-direction", "title": "Usage Direction", "href": "/components" },
-        { "id": "future-enhancements", "title": "Future Enhancements", "href": "/components" }
+        { "id": "introduction", "title": "Introduction", "active": true, "href": "/components#introduction" },
+        { "id": "design-principles", "title": "Design Principles", "href": "/components#design-principles" },
+        { "id": "usage-direction", "title": "Usage Direction", "href": "/components#usage-direction" },
+        { "id": "future-enhancements", "title": "Future Enhancements", "href": "/components#future-enhancements" }
       ]
     },
     {
