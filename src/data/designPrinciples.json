@@ -1,0 +1,52 @@
+{
+  "principles": [
+    {
+      "id": "simplicity-first",
+      "title": "Simplicity First",
+      "description": "Every component is designed with simplicity in mind. We remove unnecessary complexity and focus on clean, intuitive interfaces that users can understand immediately.",
+      "color": "from-blue-500 to-cyan-500"
+    },
+    {
+      "id": "copy-paste-ready",
+      "title": "Copy-Paste Ready",
+      "description": "Components should work out of the box with minimal setup. Copy the code, paste it into your project, and it just works. No complex configuration required.",
+      "color": "from-green-500 to-emerald-500"
+    },
+    {
+      "id": "modern-aesthetic",
+      "title": "Modern Aesthetic",
+      "description": "Contemporary design patterns with clean lines, appropriate spacing, and thoughtful use of color. Our components feel fresh and current without being trendy.",
+      "color": "from-purple-500 to-pink-500"
+    },
+    {
+      "id": "accessibility-first",
+      "title": "Accessibility by Default",
+      "description": "Every component is built with accessibility in mind. Proper ARIA labels, keyboard navigation, and screen reader support are built-in, not afterthoughts.",
+      "color": "from-orange-500 to-red-500"
+    },
+    {
+      "id": "performance-optimized",
+      "title": "Performance Optimized",
+      "description": "Lightweight, fast-loading components that don't bloat your bundle size. Optimized animations and efficient rendering keep your apps responsive.",
+      "color": "from-yellow-500 to-orange-500"
+    },
+    {
+      "id": "consistent-design",
+      "title": "Consistent Design Language",
+      "description": "A unified design system ensures all components work harmoniously together. Consistent spacing, typography, and color usage across the entire library.",
+      "color": "from-indigo-500 to-blue-500"
+    },
+    {
+      "id": "mobile-first",
+      "title": "Mobile-First Responsive",
+      "description": "Designed for mobile devices first, then enhanced for larger screens. Every component looks and works beautifully across all device sizes.",
+      "color": "from-teal-500 to-green-500"
+    },
+    {
+      "id": "developer-experience",
+      "title": "Developer Experience",
+      "description": "Clear documentation, intuitive props, and helpful TypeScript definitions. Components should be a joy to work with, not a source of frustration.",
+      "color": "from-rose-500 to-pink-500"
+    }
+  ]
+}

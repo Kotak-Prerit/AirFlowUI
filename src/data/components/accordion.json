@@ -1,0 +1,16 @@
+{
+  "multiCodeExamples": {
+    "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Accordion Component</title>\n  <script src=\"https://cdn.tailwindcss.com\"></script>\n</head>\n<body class=\"bg-black text-white p-8\">\n  <div class=\"max-w-2xl mx-auto rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800\">\n    <!-- Accordion items will be populated here -->\n  </div>\n</body>\n</html>",
+    "nextjs": "import React, { useState } from 'react';\nimport { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';\n\nconst AccordionComponent = () => {\n  const [openItems, setOpenItems] = useState({});\n\n  const accordionData = [\n    {\n      id: 'company',\n      title: 'Company Information',\n      content: 'Learn about our mission, vision, and company history.'\n    }\n  ];\n\n  const toggleAccordion = (id) => {\n    setOpenItems(prev => ({\n      ...prev,\n      [id]: !prev[id]\n    }));\n  };\n\n  return (\n    <div className=\"max-w-2xl mx-auto\">\n      {/* Accordion content */}\n    </div>\n  );\n};\n\nexport default AccordionComponent;",
+    "astro": "<div class=\"accordion-container\">\n  <div class=\"accordion\">\n    <!-- Accordion items -->\n  </div>\n</div>",
+    "vue": "<template>\n  <div class=\"max-w-2xl mx-auto\">\n    <!-- Vue accordion -->\n  </div>\n</template>",
+    "svelte": "<script>\n  let openItems = {};\n</script>\n\n<div class=\"max-w-2xl mx-auto\">\n  <!-- Svelte accordion -->\n</div>"
+  },
+  "singleCodeExamples": {
+    "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Single Expand Accordion</title>\n</head>\n<body>\n  <!-- Single expand accordion -->\n</body>\n</html>",
+    "nextjs": "import React, { useState } from 'react';\n\nconst SingleExpandAccordion = () => {\n  const [openItem, setOpenItem] = useState('company');\n  return <div>Single expand accordion</div>;\n};\n\nexport default SingleExpandAccordion;",
+    "astro": "<div class=\"single-accordion\">\n  <!-- Single expand -->\n</div>",
+    "vue": "<template>\n  <div>Single expand accordion</div>\n</template>",
+    "svelte": "<script>\n  let openItem = 'company';\n</script>\n\n<div>Single expand accordion</div>"
+  }
+}

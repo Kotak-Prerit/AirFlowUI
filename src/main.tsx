@@ -15,6 +15,11 @@ const lazySignUp = async () => ({ Component: (await import('./Pages/SignUp')).de
 const lazyDashboard = async () => ({ Component: (await import('./Pages/Dashboard')).default })
 const lazyTerms = async () => ({ Component: (await import('./Pages/Terms')).default })
 
+// Individual Component Pages
+const lazyAccordion = async () => ({ Component: (await import('./Pages/AccordionPage.tsx')).default })
+const lazyButton = async () => ({ Component: (await import('./Pages/ButtonPage')).default })
+const lazyComponent = async () => ({ Component: (await import('./Pages/GenericComponentPage')).default })
+
 function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   return children as any
 }
@@ -26,6 +31,9 @@ const router = createBrowserRouter([
     children: [
       { index: true, lazy: lazyHome },
       { path: 'components', lazy: lazyComponents },
+      { path: 'components/accordion', lazy: lazyAccordion },
+      { path: 'components/button', lazy: lazyButton },
+      { path: 'components/:componentId', lazy: lazyComponent },
       { path: 'templates', lazy: lazyTemplates },
       { path: 'signin', lazy: lazySignIn },
       { path: 'signup', lazy: lazySignUp },

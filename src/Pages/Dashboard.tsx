@@ -34,33 +34,28 @@ export default function Dashboard() {
 
         {/* User Profile Card */}
         <div className="bg-card p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-6">Profile</h2>
+          <h2 className="text-xl font-semibold mb-3 px-4">Profile</h2>
+          <hr className='border-zinc-700'/>
           
-          <div className="flex items-start gap-6">
+          <div className="flex items-start gap-6 mt-4 px-4">
             {/* Avatar */}
             <div className="flex flex-col items-center gap-3">
               <Avatar size="lg" editable={true} />
             </div>
 
             {/* User Info */}
-            <div className="flex-1 space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1">Username</label>
-                <div className="px-3 py-2 bg-zinc-800 rounded-lg border border-zinc-700">
+            <div className='flex justify-between w-full'>
+              <div className="flex flex-col flex-grow">
+                <div className="pt-2 capitalize rounded-lg ">
                   {user.username}
                 </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1">Email</label>
-                <div className="px-3 py-2 bg-zinc-800 rounded-lg border border-zinc-700">
+                <div className="font-light text-zinc-400">
                   {user.email}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1">Member Since</label>
-                <div className="px-3 py-2 bg-zinc-800 rounded-lg border border-zinc-700">
+                <div className="text-[#2B7FFF]">
                   {new Date().toLocaleDateString()}
                 </div>
               </div>
@@ -69,14 +64,14 @@ export default function Dashboard() {
         </div>
 
         {/* Bookmarks Section */}
-        <div className="bg-card p-6">
-          <h2 className="text-xl font-semibold mb-4">Bookmarked Components</h2>
+        <div className="bg-card pl-6 pt-6 pb-4 pr-4 flex flex-col w-full">
+          <h2 className="text-xl font-semibold mb-2">Bookmarked Components</h2>
           <p className="text-zinc-400">You haven't bookmarked any components yet. Start exploring our component library!</p>
-          
-          <div className="mt-6">
-            <a 
-              href="/components" 
-              className="inline-flex items-center px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-colors"
+
+          <div className="mt-6 self-end">
+            <a
+              href="/components"
+              className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors"
             >
               Browse Components
             </a>
