@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import SidebarLeft from '../components/SidebarLeft';
+import BookmarkIcon from '../components/BookmarkIcon';
 import sidebarData from '../data/sidebarSections.json';
 import buttonsData from '../data/components/buttons.json';
 
@@ -40,7 +41,16 @@ const ButtonCards = () => {
 
       <div className="flex flex-wrap gap-6">
         {currentButtons.map((button) => (
-          <div key={button.id} className={`${button.background} border border-zinc-800 rounded-xl p-6 min-w-[250px] min-h-[250px] flex-1`}>
+          <div key={button.id} className={`${button.background} border border-zinc-800 rounded-xl p-6 min-w-[250px] min-h-[250px] flex-1 relative`}>
+            
+            {/* Bookmark Icon - positioned in bottom right */}
+            <div className="absolute bottom-3 right-3">
+              <BookmarkIcon 
+                componentId={`button-${button.id}`}
+                componentName={button.name}
+                className="bg-zinc-800/80 backdrop-blur-sm border border-zinc-700"
+              />
+            </div>
             
             {/* Button preview area */}
             <div className="h-full rounded-lg p-8">
