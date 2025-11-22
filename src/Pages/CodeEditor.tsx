@@ -60,7 +60,6 @@ export default function CodeEditor() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [previewError, setPreviewError] = useState(false);
 
   const languages: Language[] = ['html', 'nextjs', 'vue', 'astro', 'svelte'];
   const categories = ['button', 'input', 'card', 'modal', 'navigation', 'form', 'layout'];
@@ -223,7 +222,6 @@ export default function CodeEditor() {
     }
 
     try {
-      setPreviewError(false);
       return (
         <div 
           className={`h-full rounded-lg ${componentData.preview.containerClass || 'flex items-center justify-center'}`}
@@ -236,7 +234,6 @@ export default function CodeEditor() {
         </div>
       );
     } catch (err) {
-      setPreviewError(true);
       return (
         <div className="h-full flex items-center justify-center text-red-400">
           <div className="text-center">
