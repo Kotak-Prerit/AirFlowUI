@@ -28,7 +28,8 @@ const BookmarkIcon: React.FC<BookmarkIconProps> = ({
 
   const checkBookmarkStatus = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/bookmarks/check/${componentId}`, {
+      const baseURL = import.meta.env.VITE_API_URL || 'https://airflow-ob6u.onrender.com/api';
+      const response = await fetch(`${baseURL}/bookmarks/check/${componentId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -58,7 +59,8 @@ const BookmarkIcon: React.FC<BookmarkIconProps> = ({
     try {
       if (isBookmarked) {
         // Remove bookmark
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/bookmarks/${componentId}`, {
+        const baseURL = import.meta.env.VITE_API_URL || 'https://airflow-ob6u.onrender.com/api';
+        const response = await fetch(`${baseURL}/bookmarks/${componentId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -71,7 +73,8 @@ const BookmarkIcon: React.FC<BookmarkIconProps> = ({
         }
       } else {
         // Add bookmark
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/bookmarks`, {
+        const baseURL = import.meta.env.VITE_API_URL || 'https://airflow-ob6u.onrender.com/api';
+        const response = await fetch(`${baseURL}/bookmarks`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
