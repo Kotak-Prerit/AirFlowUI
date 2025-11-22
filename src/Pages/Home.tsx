@@ -3,18 +3,46 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md'
 import Footer from '../components/Footer'
-import { SiHtml5, SiNextdotjs, SiAstro, SiVuedotjs, SiSvelte } from 'react-icons/si';
+import { SiHtml5, SiNextdotjs, SiAstro, SiVuedotjs, SiSvelte } from 'react-icons/si'
+import buttonsData from '../data/components/buttons.json'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const toolkitRef = useRef<HTMLDivElement>(null)
   const [openFAQ, setOpenFAQ] = useState<string | null>(null)
 
   const toggleFAQ = (id: string) => {
     setOpenFAQ(openFAQ === id ? null : id)
   }
+
+  // Floating buttons data - select first 8 buttons
+  const floatingButtons = buttonsData.buttons.slice(0, 8).map((button, index) => {
+    // Create a grid-like distribution with some randomness
+    const gridCols = 3
+    const gridRows = 3
+    const col = index % gridCols
+    const row = Math.floor(index / gridCols)
+    
+    // Base positions with some randomness
+    const baseX = (col + 1) * (100 / (gridCols + 1)) + (Math.random() - 0.5) * 15
+    const baseY = (row + 1) * (100 / (gridRows + 1)) + (Math.random() - 0.5) * 15
+    
+    return {
+      id: button.id,
+      component: button.component,
+      position: {
+        x: Math.max(10, Math.min(90, baseX)), // Keep within bounds
+        y: Math.max(10, Math.min(90, baseY)), // Keep within bounds
+      },
+      animation: {
+        duration: 3 + Math.random() * 4, // 3-7 seconds
+        delay: Math.random() * 2, // 0-2 seconds delay
+      },
+    }
+  })
 
   useEffect(() => {
     if (!heroRef.current) return
@@ -40,6 +68,78 @@ export default function Home() {
         },
       })
     }, heroRef)
+    return () => ctx.revert()
+  }, [])
+
+  // Floating buttons animation
+  useEffect(() => {
+    if (!toolkitRef.current) return
+    const ctx = gsap.context(() => {
+      // Create floating animation for each button
+      const buttons = document.querySelectorAll('.floating-button')
+      
+      buttons.forEach((button) => {
+        // Vertical floating motion
+        gsap.to(button, {
+          y: `+=${15 + Math.random() * 10}`,
+          duration: 2.5 + Math.random() * 2,
+          ease: 'power2.inOut',
+          yoyo: true,
+          repeat: -1,
+          delay: Math.random() * 2
+        })
+        
+        // Horizontal floating motion  
+        gsap.to(button, {
+          x: `+=${10 + Math.random() * 8}`,
+          duration: 3 + Math.random() * 2,
+          ease: 'power2.inOut',
+          yoyo: true,
+          repeat: -1,
+          delay: Math.random() * 1.5
+        })
+        
+        // Slight rotation
+        gsap.to(button, {
+          rotation: `+=${-5 + Math.random() * 10}`,
+          duration: 4 + Math.random() * 2,
+          ease: 'power2.inOut',
+          yoyo: true,
+          repeat: -1,
+          delay: Math.random() * 1
+        })
+
+        // Scale pulsing animation
+        gsap.to(button, {
+          scale: 0.95 + Math.random() * 0.1,
+          duration: 2 + Math.random() * 1,
+          ease: 'power2.inOut',
+          yoyo: true,
+          repeat: -1,
+          delay: Math.random() * 0.5
+        })
+      })
+
+      // Enhanced hover interactions
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+          gsap.to(button, { 
+            scale: 1.15, 
+            rotation: `+=${Math.random() * 10 - 5}`,
+            duration: 0.4, 
+            ease: 'power2.out' 
+          })
+        })
+        button.addEventListener('mouseleave', () => {
+          gsap.to(button, { 
+            scale: 1, 
+            rotation: 0,
+            duration: 0.4, 
+            ease: 'power2.out' 
+          })
+        })
+      })
+    }, toolkitRef)
     return () => ctx.revert()
   }, [])
 
@@ -262,15 +362,54 @@ export default function Home() {
       </section>
 
       {/* Components grid teaser */}
-      <section className="container-af pb-16 md:pb-24">
+      <section ref={toolkitRef} className="container-af pb-16 md:pb-24">
         <div className="flex items-end justify-between mb-6">
           <h2 className="text-2xl md:text-3xl font-semibold" data-reveal>Meet the Toolkit</h2>
           <a href="/components" className="text-sm text-blue-400" data-reveal>See more →</a>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="bg-card aspect-square" data-reveal/>
+        
+        {/* Floating Buttons Container */}
+        <div className="relative min-h-[700px] overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-900/80 to-zinc-800/60 border border-zinc-700/50 backdrop-blur-sm" data-reveal style={{
+
+      backgroundImage: `
+
+        radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #f59e0b 100%)
+
+      `,
+
+      backgroundSize: "100% 100%",
+
+    }}>
+          {/* Animated background pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 animate-pulse" style={{
+              backgroundImage: `radial-gradient(circle at 25px 25px, #3b82f6 2px, transparent 2px)`,
+              backgroundSize: '50px 50px'
+            }} />
+          </div>
+          
+          {/* Gradient overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+          
+          {/* Floating buttons */}
+          {floatingButtons.map((button) => (
+            <div
+              key={button.id}
+              className="floating-button absolute pointer-events-none z-20"
+              style={{
+                left: `${button.position.x}%`,
+                top: `${button.position.y}%`,
+                transform: 'translate(-50%, -50%)',
+                animationDelay: `${button.animation.delay}s`
+              }}
+            >
+              <div 
+                className="transform transition-all duration-300 hover:scale-110 pointer-events-auto cursor-pointer opacity-75 hover:opacity-100 hover:shadow-2xl hover:shadow-blue-500/20"
+                dangerouslySetInnerHTML={{ __html: button.component }}
+              />
+            </div>
           ))}
+          
         </div>
       </section>
 
