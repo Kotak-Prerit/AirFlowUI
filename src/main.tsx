@@ -20,6 +20,10 @@ const lazyAccordion = async () => ({ Component: (await import('./Pages/Accordion
 const lazyButton = async () => ({ Component: (await import('./Pages/ButtonPage')).default })
 const lazyComponent = async () => ({ Component: (await import('./Pages/GenericComponentPage')).default })
 
+// Admin Pages
+const lazyAdminDashboard = async () => ({ Component: (await import('./Pages/AdminDashboard')).default })
+const lazyCodeEditor = async () => ({ Component: (await import('./Pages/CodeEditor')).default })
+
 function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   return children as any
 }
@@ -39,6 +43,9 @@ const router = createBrowserRouter([
       { path: 'signup', lazy: lazySignUp },
       { path: 'dashboard', lazy: lazyDashboard },
       { path: 'terms', lazy: lazyTerms },
+      // Admin routes
+      { path: 'admin/:userID', lazy: lazyAdminDashboard },
+      { path: 'admin/codeEditor', lazy: lazyCodeEditor },
     ],
   },
 ])

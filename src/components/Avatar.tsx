@@ -14,6 +14,7 @@ export default function Avatar({ size = 'md', editable = false, showHoverEffect 
   const [showModal, setShowModal] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [imageLoadError, setImageLoadError] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const API_BASE = import.meta.env.VITE_API_URL || 'https://airflow-ob6u.onrender.com/api';
@@ -28,10 +29,60 @@ export default function Avatar({ size = 'md', editable = false, showHoverEffect 
     return username.charAt(0).toUpperCase();
   };
 
+  // Reset image error when user changes
+  React.useEffect(() => {
+    setImageLoadError(false);
+  }, [user?.avatarUrl]);
+
+  // Add effect to refresh user data if needed
+  React.useEffect(() => {
+    const refreshUserData = async () => {
+      if (user && token) {
+        // Check if avatar URL looks old or invalid
+        const hasOldAvatar = user.avatarUrl && 
+          (user.avatarUrl.includes('1762941215') || // Old timestamp
+           !user.avatarUrl.startsWith('https://res.cloudinary.com/'));
+        
+        if (hasOldAvatar) {
+          console.log('Detected old avatar URL, refreshing user data...');
+          try {
+            const response = await fetch(`${API_BASE}/user/profile`, {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+            if (response.ok) {
+              const data = await response.json();
+              if (data.user && data.user.avatarUrl !== user.avatarUrl) {
+                console.log('Updated avatar URL from server:', data.user.avatarUrl);
+                // Update user data with fresh avatar URL
+                updateUser({ avatarUrl: data.user.avatarUrl });
+              }
+            }
+          } catch (error) {
+            console.error('Failed to refresh user data:', error);
+          }
+        }
+      }
+    };
+
+    // Only refresh on component mount
+    refreshUserData();
+  }, []); // Empty dependency array to run only once
+
   const handleAvatarClick = () => {
     if (editable && fileInputRef.current) {
       fileInputRef.current.click();
     }
+  };
+
+  const handleImageError = () => {
+    console.warn('Failed to load avatar image:', user?.avatarUrl);
+    setImageLoadError(true);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoadError(false);
   };
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,6 +160,12 @@ export default function Avatar({ size = 'md', editable = false, showHoverEffect 
 
   if (!user) return null;
 
+  // Check if we should show the avatar image or initials
+  const hasValidAvatarUrl = user.avatarUrl && 
+    user.avatarUrl.trim() !== '' && 
+    user.avatarUrl.startsWith('https://') && 
+    !imageLoadError;
+
   return (
     <>
       <div 
@@ -117,11 +174,13 @@ export default function Avatar({ size = 'md', editable = false, showHoverEffect 
         }`}
         onClick={handleAvatarClick}
       >
-        {user.avatarUrl ? (
+        {hasValidAvatarUrl ? (
           <img 
-            src={user.avatarUrl} 
+            src={user.avatarUrl!} 
             alt={`${user.username}'s avatar`}
             className="w-full h-full object-cover"
+            onError={handleImageError}
+            onLoad={handleImageLoad}
           />
         ) : (
           <span>{getInitials(user.username)}</span>
